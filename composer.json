@@ -1,0 +1,28 @@
+{
+  "name": "globalis/chargebee-php-sdk-wp",
+  "description": "chargebee-php-sdk integration for WordPress ",
+  "license": "GPL-3.0-or-later",
+  "keywords": ["chargebee", "api-client", "wordpress"],
+  "type": "library",
+  "authors": [
+    {
+      "name": "Pierre Dargham",
+      "homepage": "https://github.com/pierre-dargham/"
+    },
+    {
+      "name": "GLOBALIS media systems",
+      "homepage": "https://www.globalis-ms.com/"
+    }
+  ],
+  "require": {
+    "php": "^7.4 || ^8.0 || ^8.1",
+    "globalis/chargebee-php-sdk": "^1.0",
+    "globalis/wp-cubi-helpers": "^1.0"
+  },
+  "autoload": {
+    "files": [
+      "wordpress-integration.php"
+    ]
+  },
+  "minimum-stability": "stable"
+}
