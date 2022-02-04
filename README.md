@@ -25,6 +25,8 @@ Basic usage
 ------------
 
 ```php
+<?php
+
 add_action('globalis/chargebee_api_response', function($event) {
     // $event contains data about the API request and response
     // do something
