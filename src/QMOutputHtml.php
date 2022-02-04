@@ -7,8 +7,8 @@ class QMOutputHtml extends \QM_Output_Html
     public function __construct(\QM_Collector $collector)
     {
         parent::__construct($collector);
-        add_filter('qm/output/menus', array( $this, 'admin_menu' ), 90);
-        add_filter('qm/output/menu_class', array( $this, 'admin_class' ));
+        add_filter('qm/output/menus', [ $this, 'admin_menu' ], 90);
+        add_filter('qm/output/menu_class', [ $this, 'admin_class' ]);
     }
 
     public static function register(array $output, \QM_Collectors $collectors)
@@ -103,7 +103,7 @@ class QMOutputHtml extends \QM_Output_Html
 
             foreach ($data['http'] as $key => $row) {
                 if (isset($row['trace'])) {
-                    $stack          = array();
+                    $stack          = [];
                     $filtered_trace = $row['trace']->get_display_trace();
 
                     array_shift($filtered_trace);
@@ -139,7 +139,7 @@ class QMOutputHtml extends \QM_Output_Html
 
                 $i++;
                 $is_error = false;
-                $row_attr = array();
+                $row_attr = [];
                 $css      = '';
 
                 if (!empty($row['error'])) {
@@ -282,12 +282,12 @@ class QMOutputHtml extends \QM_Output_Html
             /* translators: %s: Number of calls to the HTTP API */
             : __('Chargebee API Calls (%s)', 'query-monitor');
 
-        $args = array(
+        $args = [
             'title' => esc_html(sprintf(
                 $title,
                 number_format_i18n($count)
             )),
-        );
+        ];
 
         if (isset($data['errors']['alert'])) {
             $args['meta']['classname'] = 'qm-alert';
