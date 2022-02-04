@@ -1,4 +1,4 @@
-# chargebee-php-sdk
+# chargebee-php-sdk-wp
 
 [![Packagist](https://img.shields.io/packagist/dt/globalis/chargebee-php-sdk-wp.svg?style=flat-square)](https://packagist.org/packages/globalis/chargebee-php-sdk-wp)
 [![Latest Stable Version](https://poser.pugx.org/globalis/chargebee-php-sdk-wp/v/stable)](https://packagist.org/packages/globalis/chargebee-php-sdk-wp)
