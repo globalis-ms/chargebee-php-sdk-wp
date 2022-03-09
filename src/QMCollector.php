@@ -34,6 +34,30 @@ class QMCollector extends \QM_Collector
         return $actions;
     }
 
+    public function qm_backtrace_to_ignore()
+    {
+        $args = [
+            'ignore_class' => [
+                'League\Event\EventDispatcher' => true,
+                'Globalis\Chargebee\WordPressIntegration' => true,
+                'Globalis\Chargebee\Client' => true,
+                'Globalis\Chargebee\Api\AbstractApi' => true,
+            ],
+            'ignore_hook' => [
+                'globalis/chargebee_api_response' => true,
+                'globalis/chargebee_api_error' => true,
+            ],
+        ];
+
+        foreach (get_declared_classes() as $class_name) {
+            if (\Globalis\WP\Cubi\str_starts_with($class_name, "Globalis\\Chargebee\\Api\\")) {
+                $args['ignore_class'][$class_name] = true;
+            }
+        }
+
+        return $args;
+    }
+
     public function log_chargebee_response($event)
     {
         $data_qm = [
@@ -46,10 +70,8 @@ class QMCollector extends \QM_Collector
             'status' => $event->response->getStatusCode(),
             'error' => null,
             'time' => isset($event->time) ? (float) $event->time : [],
-            'trace' => new \QM_Backtrace(),
+            'trace' => new \QM_Backtrace($this->qm_backtrace_to_ignore()),
         ];
-
-        $data_qm['trace']->ignore(6);
 
         $this->data['http'][] = $data_qm;
     }
@@ -80,10 +102,8 @@ class QMCollector extends \QM_Collector
             'status' => $event->response->getStatusCode(),
             'error' => $error,
             'time' => isset($event->time) ? (float) $event->time : [],
-            'trace' => new \QM_Backtrace(),
+            'trace' => new \QM_Backtrace($this->qm_backtrace_to_ignore()),
         ];
-
-        $data_qm['trace']->ignore(6);
 
         $this->data['errors']['warning'][] = microtime();
 
